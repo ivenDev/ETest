@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ETest</string>
+
+    <!--region экран выбора группы -->
+    <string name="btn_text_G3"> Группа III </string>
+    <string name="btn_text_G2"> Группа II </string>
+    <string name="btn_text_G4"> Группа IV </string>
+    <string name="btn_text_G5"> Группа V </string>
+    <string name="number_selected_group_text"> Группа %d </string>
+    <!--endregion-->
+
+    <!--region экран выбора билета -->
+    <string name="number_ticket_text"> Билет %d </string>
+    <string name="dataErr"> Ошибка данных </string>
+    <string name="no_data_text">Данные в разработке</string>
+    <!--endregion-->
+
+    <!--region экран вопросов start -->
+    <string name="answerText"><b><u>Ваш ответ:</u></b> \n\n%s \n</string>
+    <string name="correctAnswerText"><b>Правильный ответ:</b>\n\n%s \n</string>
+    <string name="nextButtonText">Продолжить</string>
+    <string name="testEnded">Тест пройден</string>
+    <!--endregion  end -->
+
+    <!--region result screen  -->
+    <string name="quantityOfCorrectAnswersText">Правильных ответов: %d </string>
+    <string name="quantityOfIncorrectAnswersText">Неправильных ответов: %d </string>
+    <string name="repeatButtonText">Пройти заново</string>
+    <string name="homeButtonText">На главную</string>
+    <!--endregion result screen  -->
+
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="16dp"
+    tools:context=".view.GroupSelActivity">
+
+    <Button
+        android:id="@+id/group_2_btn"
+        android:text="@string/btn_text_G2"
+        android:onClick="btnClick"
+        style="@style/BtnGroupSel"
+        />
+
+    <Button
+        android:id="@+id/group_3_btn"
+        android:text="@string/btn_text_G3"
+        android:onClick="btnClick"
+        style="@style/BtnGroupSel"
+        />
+
+    <Button
+        android:id="@+id/group_4_btn"
+        android:text="@string/btn_text_G4"
+        android:onClick="btnClick"
+        style="@style/BtnGroupSel"
+        />
+
+    <Button
+        android:id="@+id/group_5_btn"
+        android:text="@string/btn_text_G5"
+        android:onClick="btnClick"
+        style="@style/BtnGroupSel"
+        />
+
+
+</LinearLayout>

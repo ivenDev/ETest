@@ -1,0 +1,128 @@
+﻿{
+  "groupNum": 2,
+
+  "questions": [
+    {
+
+      "questionNum": 180,
+
+      "questionText": "Гр2 Вопрос 1 JSON",
+
+      "isCorrect": false,
+
+      "answers": [
+        {
+
+          "answerText": "Гр2 Ответ 1.1",
+
+          "isTrueOrFalse": false
+
+        },
+
+        {
+
+          "answerText": "Гр2 Ответ 1.2",
+
+          "isTrueOrFalse": false
+
+        },
+
+        {
+
+          "answerText": "Гр2 Ответ 1.3",
+
+          "isTrueOrFalse": true
+
+        },
+
+        {
+
+          "answerText": "Гр2 Ответ 1.4",
+
+          "isTrueOrFalse": false
+
+        }
+
+      ]
+
+    },
+
+    {
+
+      "questionNum": 181,
+
+      "questionText": "Гр2 Вопрос 2 JSON",
+
+      "isCorrect": false,
+
+      "answers": [
+
+        {
+
+          "answerText": "Гр2 Ответ 2.1",
+
+          "isTrueOrFalse": false
+
+        },
+
+        {
+
+          "answerText": "Гр2 Ответ 2.2",
+
+          "isTrueOrFalse": false
+
+        },
+
+        {
+
+          "answerText": "Гр2 Ответ 2.3",
+
+          "isTrueOrFalse": false
+
+        },
+
+        {
+
+          "answerText": "Гр2 Ответ 2.4",
+
+          "isTrueOrFalse": true
+
+        },
+
+        {
+
+          "answerText": "Гр2 Ответ 2.5",
+
+          "isTrueOrFalse": false
+
+        }
+
+      ]
+
+    }
+
+  ],
+
+  "tickets": [
+    {
+      "ticketNum": 1,
+      "questionsNumList": [
+        180,
+        181
+      ]
+    },
+    {
+      "ticketNum": 2,
+      "questionsNumList": [
+        181,
+        180
+      ]
+    },
+    {
+      "ticketNum": 3,
+      "questionsNumList": [
+        181
+      ]
+    }
+  ]
+}
