@@ -32,7 +32,7 @@ public class TicketSelActivity extends Activity<PresenterOfSelections>{
 
         setTitle("Группа " + mGroupNum);
 
-        List<Ticket> mTickets = mPresenter.getTickets(mGroupNum);// FIXME: 12.11.2018 активити не должен работать с данными, переделать
+        List<Ticket> mTickets = mPresenter.getTickets(mGroupNum);
 
         if (mTickets != null) {
             int mNumberOfTickets = mTickets.size();
@@ -122,9 +122,7 @@ public class TicketSelActivity extends Activity<PresenterOfSelections>{
     protected void onDestroy() {
         super.onDestroy();
 
-        mPresenter.detachView();//TODO: узнать, в каком методе лучше освободить память
+        mPresenter.detachView();
         mPresenter = null;
-        /*mGroupNum = 0;
-        mTicketNum = 0;*/
     }
 }

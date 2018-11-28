@@ -104,11 +104,11 @@ public class Model implements Contract.Model {
 
     }
 
-    // FIXME: 07.11.2018 здесь questionNum - это порядковый номер вопроса в билете, исправить
-    public Question getQuestion(int groupNumber, int ticketNumber, int questionNum) {
+
+    public Question getQuestion(int groupNumber, int ticketNumber, int questionNumInTicket) {
 
 
-        return getQuestions(groupNumber, ticketNumber).get(questionNum - 1);
+        return getQuestions(groupNumber, ticketNumber).get(questionNumInTicket - 1);
     }
 
 
