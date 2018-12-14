@@ -20,9 +20,7 @@ public interface Contract {
     interface Model {
         List<Ticket> getTickets(int groupNumber);
         Ticket getTicket(int groupNumber, int ticketNumber);
-        /*Question getQuestion(int questionId);*/
         void updateDB(Question question, int groupNum, int ticketNum);
-        /*void initData();*/
 
 
     }

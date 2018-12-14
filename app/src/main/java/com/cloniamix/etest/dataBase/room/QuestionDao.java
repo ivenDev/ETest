@@ -18,6 +18,9 @@ public interface QuestionDao {
     @Query("SELECT * FROM questionforroom")
     List<QuestionForRoom> getAllQuestions();
 
+    @Query("SELECT * FROM questionforroom WHERE groupNum = :groupNum")
+    List<QuestionForRoom> getGroupQuestions(int groupNum);
+
     @Query("SELECT * FROM questionforroom WHERE groupNum = :groupNum AND questionNum = :questionNum" )
     QuestionForRoom getQuestionByNum(int groupNum, int questionNum);
 //

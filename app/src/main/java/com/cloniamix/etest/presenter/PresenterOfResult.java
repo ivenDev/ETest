@@ -21,7 +21,7 @@ public class PresenterOfResult extends MainPresenter<ResultActivity> {
 
         int quantityOfCorrect = 0;
         int quantityOfInCorrect = 0;
-        for (Question question : mModel.getQuestions(groupNum, ticketNum)){
+        for (Question question : mModel.getTicketQuestions(groupNum, ticketNum)){
 
             if (question.isCorrect()){
                 quantityOfCorrect++;

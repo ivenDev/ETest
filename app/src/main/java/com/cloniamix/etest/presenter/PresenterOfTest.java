@@ -63,9 +63,9 @@ public class PresenterOfTest extends MainPresenter<QuestionActivity> {
 
     public void updateView(){
 
-        if (mQuestionNum <= mModel.getQuestions(mGroupNum,mTicketNum).size() ) {
+        if (mQuestionNum <= mModel.getTicketQuestions(mGroupNum,mTicketNum).size() ) {
             mTicket = mModel.getTicket(mGroupNum, mTicketNum);
-            mQuestion = mModel.getQuestion(mGroupNum, mTicketNum, mQuestionNum);
+            mQuestion = mModel.getTicketQuestion(mGroupNum, mTicketNum, mQuestionNum);
             String questionText = mQuestion.getQuestionText();
             mView.setQuestionNum(mQuestionNum);
             mView.showQuestionText(questionText);

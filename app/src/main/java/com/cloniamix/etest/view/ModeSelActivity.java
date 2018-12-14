@@ -25,9 +25,10 @@ public class ModeSelActivity extends Activity<PresenterOfSelections> implements 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.question_mode_btn:
+                mPresenter.selectMode(R.string.question_mode_btn_text);
                 break;
             case R.id.ticket_mode_btn:
-                mPresenter.selectMode(R.string.ticket_mode_btn_text);
+
                 break;
             case R.id.exam_mode_btn:
                 break;
@@ -36,7 +37,7 @@ public class ModeSelActivity extends Activity<PresenterOfSelections> implements 
 
     @Override
     public void goToActivity() {
-            Intent intent = new Intent(this,TicketSelActivity.class);
+            Intent intent = new Intent(this,QuestionSelActivity.class);
             intent.putExtra("groupNum",mGroupNum);
             startActivity(intent);
 

@@ -2,6 +2,7 @@ package com.cloniamix.etest.presenter;
 
 import com.cloniamix.etest.Contract;
 import com.cloniamix.etest.R;
+import com.cloniamix.etest.pojo.Question;
 import com.cloniamix.etest.pojo.Ticket;
 import java.util.List;
 
@@ -39,6 +40,10 @@ public class PresenterOfSelections extends MainPresenter<Contract.View> {
 
     }
 
+
+    public List<Question> getQuestions(int groupNum){
+        return mModel.getGroupQuestions(groupNum);
+    }
 
     public List<Ticket> getTickets(int groupNum) {
         return mModel.getTickets(groupNum);

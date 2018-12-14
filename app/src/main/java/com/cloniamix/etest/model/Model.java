@@ -72,7 +72,7 @@ public class Model implements Contract.Model {
         return ticket;
     }
 
-    public List<Question> getQuestions(int groupNumber, int ticketNumber) {
+    public List<Question> getTicketQuestions(int groupNumber, int ticketNumber) {
         List<Question> questions = new ArrayList<>();
         Ticket ticket = getTicket(groupNumber, ticketNumber);
         for (int questionNum : ticket.getQuestionsNumList()) {
@@ -84,7 +84,7 @@ public class Model implements Contract.Model {
             String questionText = questionForRoom.getQuestionText();
             boolean correct = questionForRoom.isCorrect();
 
-            question.setQuestionId(id);// added 8.11.18
+            question.setQuestionId(id);
             question.setQuestionNum(num);
             question.setQuestionText(questionText);
             question.setCorrect(correct);
@@ -105,12 +105,43 @@ public class Model implements Contract.Model {
     }
 
 
-    public Question getQuestion(int groupNumber, int ticketNumber, int questionNumInTicket) {
+    public Question getTicketQuestion(int groupNumber, int ticketNumber, int questionNumInTicket) {
 
 
-        return getQuestions(groupNumber, ticketNumber).get(questionNumInTicket - 1);
+        return getTicketQuestions(groupNumber, ticketNumber).get(questionNumInTicket - 1);
     }
 
+    public List<Question> getGroupQuestions(int groupNum){
+        List<Question> questions = new ArrayList<>();
+        List<QuestionForRoom> questionForRoomList = db.mQuestionDao().getGroupQuestions(groupNum);
+
+        for (QuestionForRoom questionForRoom: questionForRoomList){
+            Question question = new Question();
+
+            int id = questionForRoom.getQuestionId();
+            int questionNum = questionForRoom.getQuestionNum();
+            String questionText = questionForRoom.getQuestionText();
+            boolean correct = questionForRoom.isCorrect();
+
+            List<Answer> answers = new ArrayList<>();
+            for (AnswerForRoom answerForRoom : mQuestionDao.getAllAnswers(groupNum, questionNum)) {
+                Answer answer = new Answer();
+                answer.setAnswerText(answerForRoom.getAnswerText());
+                answer.setTrueOrFalse(answerForRoom.isTrueOrFalse());
+                answers.add(answer);
+            }
+
+            question.setQuestionId(id);
+            question.setQuestionNum(questionNum);
+            question.setQuestionText(questionText);
+            question.setCorrect(correct);
+            question.setAnswers(answers);
+
+            questions.add(question);
+        }
+
+        return questions;
+    }
 
     @Override
     public void updateDB(Question question, int groupNum, int ticketNum) {
