@@ -4,7 +4,7 @@ import com.cloniamix.etest.R;
 import com.cloniamix.etest.pojo.Question;
 import com.cloniamix.etest.view.GroupSelActivity;
 import com.cloniamix.etest.view.ResultActivity;
-import com.cloniamix.etest.view.TicketActivity;
+import com.cloniamix.etest.view.QuestionActivity;
 import com.cloniamix.etest.view.TicketSelActivity;
 
 public class PresenterOfResult extends MainPresenter<ResultActivity> {
@@ -41,7 +41,7 @@ public class PresenterOfResult extends MainPresenter<ResultActivity> {
                 break;
 
             case R.id.repeatBtn:
-                this.mView.goToActivity(TicketActivity.class);
+                this.mView.goToActivity(QuestionActivity.class);
                 break;
 
             case R.id.ticketSelBtn:

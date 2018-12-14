@@ -3,23 +3,23 @@ package com.cloniamix.etest.presenter;
 import com.cloniamix.etest.pojo.Answer;
 import com.cloniamix.etest.pojo.Question;
 import com.cloniamix.etest.pojo.Ticket;
-import com.cloniamix.etest.view.TicketActivity;
+import com.cloniamix.etest.view.QuestionActivity;
 
 import java.util.List;
 
 
-public class PresenterOfTest extends MainPresenter<TicketActivity> {
+public class PresenterOfTest extends MainPresenter<QuestionActivity> {
 
     private int mGroupNum;
     private int mTicketNum;
     private int mQuestionNum;
-    private TicketActivity mView;
+    private QuestionActivity mView;
     private Question mQuestion;
 
     private Ticket mTicket;
 
 
-    public PresenterOfTest(TicketActivity view, int groupNum, int ticketNum){
+    public PresenterOfTest(QuestionActivity view, int groupNum, int ticketNum){
         super(view);
 
         mGroupNum = groupNum;

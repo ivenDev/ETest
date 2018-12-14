@@ -14,7 +14,7 @@ import com.cloniamix.etest.presenter.PresenterOfTest;
 
 import java.util.List;
 
-public class TicketActivity extends Activity<PresenterOfTest> {
+public class QuestionActivity extends Activity<PresenterOfTest> {
 
     private int mGroupNum;
     private int mTicketNum;
