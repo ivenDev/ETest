@@ -9,11 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.cloniamix.etest.pojo.Ticket;
 import com.cloniamix.etest.presenter.PresenterOfSelections;
 import com.cloniamix.etest.R;
-
 import java.util.List;
 
 
@@ -111,7 +109,7 @@ public class TicketSelActivity extends Activity<PresenterOfSelections>{
 
     @Override
     public void goToActivity() {
-        Intent intent = new Intent(this, TicketActivity.class);
+        Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra("groupNum",mGroupNum);
         intent.putExtra("ticketNum",mTicketNum);
         startActivity(intent);
