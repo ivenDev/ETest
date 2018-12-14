@@ -9,6 +9,14 @@
     <string name="number_selected_group_text"> Группа %d </string>
     <!--endregion-->
 
+
+    <!--region экран выбора режима -->
+    <string name="question_mode_btn_text">Учить вопросы</string>
+    <string name="ticket_mode_btn_text">Учить билеты</string>
+    <string name="exam_mode_btn_text">Экзамен</string>
+    <!--endregion-->
+
+
     <!--region экран выбора билета -->
     <string name="number_ticket_text"> Билет %d </string>
     <string name="dataErr"> Ошибка данных </string>

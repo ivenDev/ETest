@@ -12,6 +12,7 @@ public class PresenterOfSelections extends MainPresenter<Contract.View> {
         super(view);
     }
 
+
     public void selectGroup() {
         mView.showToast(R.string.number_selected_group_text);
 
@@ -19,9 +20,16 @@ public class PresenterOfSelections extends MainPresenter<Contract.View> {
     }
 
 
-    public void selectTicket(int ticketNum) {
+    public void selectTicket(/*int ticketNum*/) {
 
         mView.showToast(R.string.number_ticket_text);
+        mView.goToActivity();
+    }
+
+
+    public void selectMode(int resId) {
+
+        mView.showToast(resId);
         mView.goToActivity();
     }
 
@@ -35,10 +43,5 @@ public class PresenterOfSelections extends MainPresenter<Contract.View> {
     public List<Ticket> getTickets(int groupNum) {
         return mModel.getTickets(groupNum);
     }
-
-    /*public int getPercent(int groupNum, int ticketNum){
-
-        return mModel.getPercentAnswered(groupNum, ticketNum);
-    }*/
 
 }

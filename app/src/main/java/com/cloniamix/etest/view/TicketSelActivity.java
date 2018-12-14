@@ -76,7 +76,7 @@ public class TicketSelActivity extends Activity<PresenterOfSelections>{
                         @Override
                         public void onClick(View v) {
                             mTicketNum = a;
-                            mPresenter.selectTicket(a);
+                            mPresenter.selectTicket(/*a*/);
                         }
                     });
 

@@ -36,7 +36,7 @@ public class GroupSelActivity extends Activity<PresenterOfSelections> {
 
     @Override
     public void goToActivity(){
-        Intent intent = new Intent(this, TicketSelActivity.class);
+        Intent intent = new Intent(this, /*TicketSelActivity.class*/ModeSelActivity.class);
         intent.putExtra("groupNum",mGroupNum);
         startActivity(intent);
     }
