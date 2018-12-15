@@ -20,6 +20,8 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
     private int mTicketNum;
     private int mQuestionNum;
 
+    private int mMode;
+
     private TextView mQuestionTextView;
     private LinearLayout mContainerForAnswers;
     private LinearLayout.LayoutParams lp;
@@ -33,13 +35,17 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
 
 
         if (savedInstanceState == null){
-            mQuestionNum = 1;
-            mGroupNum = getIntent().getIntExtra("groupNum",0);
+            mQuestionNum = getIntent().getIntExtra("questionNum",1);
+            mGroupNum = getIntent().getIntExtra("groupNum",3);
             mTicketNum = getIntent().getIntExtra("ticketNum",0);
+
+            mMode = getIntent().getIntExtra("mode", 0);
         }else {
             mQuestionNum = savedInstanceState.getInt("questionNum");
             mGroupNum = savedInstanceState.getInt("groupNum");
             mTicketNum = savedInstanceState.getInt("ticketNum");
+
+            mMode = savedInstanceState.getInt("mode");
         }
 
 
@@ -49,7 +55,7 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
         mQuestionTextView = findViewById(R.id.question_text_view);
         mContainerForAnswers = findViewById(R.id.container_for_answer_buttons);
 
-        mPresenter.onCreated(mQuestionNum);
+        mPresenter.onCreated(mQuestionNum, mMode);
 
     }
 
@@ -62,9 +68,23 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
         mQuestionNum = questionNum;
     }
 
+    public void setTicketNum(int ticketNum){
+        mTicketNum = ticketNum;
+    }
+
+
+    public void setTitle(){
+        if (mTicketNum != 0){
+            setTitle("Гр" + mGroupNum + " Б" + mTicketNum + " Вопрос " + mQuestionNum);
+        }else {
+            setTitle("Гр" + mGroupNum + " Вопрос " + mQuestionNum);
+        }
+
+    }
+
     public void showQuestionText(String questionText){
         mQuestionTextView.setText(questionText);
-        setTitle("Гр" + mGroupNum + " Б" + mTicketNum + " Вопрос " + mQuestionNum);
+
     }
 
     public void showAnswers(List<String> answers){
@@ -139,12 +159,17 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(this,TicketSelActivity.class);
+    public void goToActivity(Class<?> cls) {
+        Intent intent = new Intent(this,cls);
         intent.putExtra("groupNum",mGroupNum);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mPresenter.onBack();
     }
 
     @Override
@@ -159,6 +184,7 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
         outState.putInt("questionNum",mQuestionNum);
         outState.putInt("groupNum",mGroupNum);
         outState.putInt("ticketNum",mTicketNum);
+        outState.putInt("mode",mMode);
     }
 
     @Override

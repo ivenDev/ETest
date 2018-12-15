@@ -1,5 +1,6 @@
 package com.cloniamix.etest.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayout;
@@ -17,6 +18,7 @@ import java.util.List;
 public class QuestionSelActivity extends Activity<PresenterOfSelections> {
 
     private int mGroupNum;
+    private int mQuestionNum;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,8 +30,9 @@ public class QuestionSelActivity extends Activity<PresenterOfSelections> {
         setTitle("Группа " + mGroupNum);
 
         List<Question> questionList = mPresenter.getQuestions(mGroupNum);
-        if (questionList != null){
-            int numberOfQuestions = questionList.size();
+        int numberOfQuestions = questionList.size();
+        /*if (questionList != null){*/
+
             GridLayout gridLayout = findViewById(R.id.question_selection_buttons_container);
             gridLayout.setColumnCount(4);
 
@@ -40,6 +43,7 @@ public class QuestionSelActivity extends Activity<PresenterOfSelections> {
                             GridLayout.spec(GridLayout.UNDEFINED, 1f));
                     buttonParam.width = 0;
 
+                    final int a = i;
                     final Button button = new Button(this);
 
                     String btnText = "" + i;
@@ -51,7 +55,8 @@ public class QuestionSelActivity extends Activity<PresenterOfSelections> {
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            mQuestionNum = a;
+                            mPresenter.selectQuestion();
                         }
                     });
 
@@ -68,13 +73,18 @@ public class QuestionSelActivity extends Activity<PresenterOfSelections> {
                 textView.setText(R.string.no_data_text);
                 gridLayout.addView(textView);
             }
-        }else {
+        /*}else {
             mPresenter.receivedADataErr();
-        }
+        }*/
     }
 
     @Override
-    public void goToActivity() {
+    public void goToActivity(){
+        Intent intent = new Intent(this, QuestionActivity.class);
+        intent.putExtra("groupNum",mGroupNum);
+        intent.putExtra("questionNum",mQuestionNum);
+        intent.putExtra("mode", 1);
+        startActivity(intent);
 
     }
 }

@@ -70,8 +70,8 @@ public  class ParseData {
             questionForRoom.setQuestionNum(questionNum);
             questionForRoom.setGroupNum(groupNum);
             questionForRoom.setQuestionText(questionText);
-            questionForRoom.setCorrect(correct);
             questionForRoom.setUsed(false);// added 9.11.18
+            questionForRoom.setCorrect(correct);
             questions.add(questionForRoom);
 
             for (Answer answer: question.getAnswers()){

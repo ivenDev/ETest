@@ -8,6 +8,7 @@ public interface Contract {
     interface View {
         void showToast(int resId);
         void goToActivity();
+        void goToActivity(Class<?> cls);
 
     }
 
@@ -20,7 +21,8 @@ public interface Contract {
     interface Model {
         List<Ticket> getTickets(int groupNumber);
         Ticket getTicket(int groupNumber, int ticketNumber);
-        void updateDB(Question question, int groupNum, int ticketNum);
+        void updateQuestionInDB(Question question);
+        void updateTicketInDB(Question question, int groupNum, int ticketNum);
 
 
     }

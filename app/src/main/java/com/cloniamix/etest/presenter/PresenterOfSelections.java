@@ -4,6 +4,9 @@ import com.cloniamix.etest.Contract;
 import com.cloniamix.etest.R;
 import com.cloniamix.etest.pojo.Question;
 import com.cloniamix.etest.pojo.Ticket;
+import com.cloniamix.etest.view.QuestionSelActivity;
+import com.cloniamix.etest.view.TicketSelActivity;
+
 import java.util.List;
 
 public class PresenterOfSelections extends MainPresenter<Contract.View> {
@@ -28,9 +31,24 @@ public class PresenterOfSelections extends MainPresenter<Contract.View> {
     }
 
 
-    public void selectMode(int resId) {
+    public void selectMode(/*int restTextId,*/ int btnId) {
 
-        mView.showToast(resId);
+        /*mView.showToast();*/
+        switch (btnId){
+            case R.id.question_mode_btn:
+                mView.goToActivity(QuestionSelActivity.class);
+                break;
+            case R.id.ticket_mode_btn:
+                mView.goToActivity(TicketSelActivity.class);
+                break;
+            case R.id.exam_mode_btn:
+                break;
+        }
+
+    }
+
+
+    public void selectQuestion(){
         mView.goToActivity();
     }
 

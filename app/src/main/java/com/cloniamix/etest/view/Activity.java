@@ -1,6 +1,7 @@
 package com.cloniamix.etest.view;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 import com.cloniamix.etest.Contract;
@@ -19,6 +20,12 @@ public abstract class Activity<P> extends AppCompatActivity implements Contract.
 
     @Override
     public abstract void goToActivity();
+
+    @Override
+    public void goToActivity(Class<?> cls) {
+        Intent intent = new Intent(this,cls);
+        startActivity(intent);
+    }
 
     @Override
     protected void onDestroy() {

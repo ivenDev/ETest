@@ -112,6 +112,9 @@ public class TicketSelActivity extends Activity<PresenterOfSelections>{
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra("groupNum",mGroupNum);
         intent.putExtra("ticketNum",mTicketNum);
+
+        intent.putExtra("mode", 2);
+
         startActivity(intent);
     }
 

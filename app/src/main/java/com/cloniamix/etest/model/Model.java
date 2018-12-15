@@ -73,6 +73,7 @@ public class Model implements Contract.Model {
     }
 
     public List<Question> getTicketQuestions(int groupNumber, int ticketNumber) {
+
         List<Question> questions = new ArrayList<>();
         Ticket ticket = getTicket(groupNumber, ticketNumber);
         for (int questionNum : ticket.getQuestionsNumList()) {
@@ -144,15 +145,15 @@ public class Model implements Contract.Model {
     }
 
     @Override
-    public void updateDB(Question question, int groupNum, int ticketNum) {
+    public void updateQuestionInDB(Question question) {
         db.mQuestionDao().updateQuestion(question.getQuestionId(), question.isCorrect(), true);
+    }
 
+    @Override
+    public void updateTicketInDB(Question question, int groupNum, int ticketNum) {
         TicketForRoom ticketForRoom = db.mQuestionDao().getTicketByQuestionNum(groupNum, ticketNum , question.getQuestionNum());
         ticketForRoom.setCorrectAnswered(question.isCorrect());
         ticketForRoom.setUsed(true);
         db.mQuestionDao().updateTicket(ticketForRoom);
-
-
     }
-
 }
