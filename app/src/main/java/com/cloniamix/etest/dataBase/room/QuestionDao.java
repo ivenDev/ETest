@@ -76,5 +76,5 @@ public interface QuestionDao {
     void updateTicket(TicketForRoom ticket);
 
     @Delete
-    void deleteQuesrion(QuestionForRoom question);
+    void deleteQuestion(QuestionForRoom question);
 }

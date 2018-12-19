@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.cloniamix.etest.R;
@@ -18,6 +19,8 @@ public class ResultActivity extends Activity<PresenterOfResult> {
     private int mGroupNum;
     private int mTicketNum;
 
+    private int mMode;
+
     private TextView mQuantityOfCorrectAnswerText;
     private TextView mQuantityOfIncorrectAnswerText;
 
@@ -29,12 +32,13 @@ public class ResultActivity extends Activity<PresenterOfResult> {
         mPresenter = new PresenterOfResult(this);
         mGroupNum = getIntent().getIntExtra("groupNum",0);
         mTicketNum = getIntent().getIntExtra("ticketNum",0);
+        mMode = getIntent().getIntExtra("mode", 0);
 
         mQuantityOfCorrectAnswerText = findViewById(R.id.quantityCorrectAnswersTextView);
         mQuantityOfIncorrectAnswerText = findViewById(R.id.quantityIncorrectAnswersTextView);
 
         
-        mPresenter.onCreated(mGroupNum, mTicketNum);
+        mPresenter.onCreated(mGroupNum, mTicketNum,mMode);
 
     }
 
@@ -52,6 +56,13 @@ public class ResultActivity extends Activity<PresenterOfResult> {
         mPresenter.onBtnClicked(v.getId());
     }
 
+    public void changeBtns(){
+        /*Button homeBtn = findViewById(R.id.home_btn);
+        Button repeatBtn = findViewById(R.id.repeat_btn);*/
+        Button ticketSelBtn = findViewById(R.id.ticket_sel_btn);
+
+        ticketSelBtn.setText("К выбору вопроса");
+    }
 
     @Override
     public void onBackPressed() {
@@ -73,6 +84,7 @@ public class ResultActivity extends Activity<PresenterOfResult> {
         Intent intent = new Intent(this,cls);
         intent.putExtra("groupNum",mGroupNum);
         intent.putExtra("ticketNum",mTicketNum);
+        intent.putExtra("mode",mMode);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 

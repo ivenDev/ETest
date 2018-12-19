@@ -65,6 +65,7 @@ public class Model implements Contract.Model {
 
         ticket.setQuestionsNumList(questionsNumList);
         ticket.setUsedTicketCount(usedCount);
+        ticket.setCorrectAnsweredCount(isCorrect);
         ticket.setPercentAnswered(isCorrect*100/questionsNumList.size());
 
 
@@ -123,6 +124,7 @@ public class Model implements Contract.Model {
             int questionNum = questionForRoom.getQuestionNum();
             String questionText = questionForRoom.getQuestionText();
             boolean correct = questionForRoom.isCorrect();
+            boolean used = questionForRoom.isUsed();
 
             List<Answer> answers = new ArrayList<>();
             for (AnswerForRoom answerForRoom : mQuestionDao.getAllAnswers(groupNum, questionNum)) {
@@ -136,6 +138,7 @@ public class Model implements Contract.Model {
             question.setQuestionNum(questionNum);
             question.setQuestionText(questionText);
             question.setCorrect(correct);
+            question.setUsed(used);
             question.setAnswers(answers);
 
             questions.add(question);
@@ -146,14 +149,24 @@ public class Model implements Contract.Model {
 
     @Override
     public void updateQuestionInDB(Question question) {
-        db.mQuestionDao().updateQuestion(question.getQuestionId(), question.isCorrect(), true);
+        int id =question.getQuestionId();
+        boolean used = question.isUsed();
+        db.mQuestionDao().updateQuestion(question.getQuestionId(), question.isCorrect(), question.isUsed());
     }
 
     @Override
     public void updateTicketInDB(Question question, int groupNum, int ticketNum) {
         TicketForRoom ticketForRoom = db.mQuestionDao().getTicketByQuestionNum(groupNum, ticketNum , question.getQuestionNum());
         ticketForRoom.setCorrectAnswered(question.isCorrect());
-        ticketForRoom.setUsed(true);
+        ticketForRoom.setUsed(question.isUsed());
         db.mQuestionDao().updateTicket(ticketForRoom);
+    }
+
+
+    public void resetQuestionUsed(List<Question> questions){
+        for (Question question: questions){
+            question.setUsed(false);
+            updateQuestionInDB(question);
+        }
     }
 }

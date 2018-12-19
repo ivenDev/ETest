@@ -82,6 +82,7 @@ public class PresenterOfTest extends MainPresenter<QuestionActivity> {
         }
         mQuestionNum++;
         mView.setQuestionNum(mQuestionNum);
+        mQuestion.setUsed(true);
 
         if (answerText.equals(correctAnswerText)){
             mQuestion.setCorrect(true);

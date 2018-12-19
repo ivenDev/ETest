@@ -155,6 +155,7 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
         Intent intent = new Intent(this,ResultActivity.class);
         intent.putExtra("groupNum",mGroupNum);
         intent.putExtra("ticketNum",mTicketNum);
+        intent.putExtra("mode",mMode);
         startActivity(intent);
     }
 

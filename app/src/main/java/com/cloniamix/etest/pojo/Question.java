@@ -9,6 +9,7 @@ public class Question {
     private int questionNum;
     private String questionText;
     private boolean isCorrect;
+    private boolean isUsed;
     private List<Answer> answers;
 
     //region getters & setters
@@ -55,6 +56,14 @@ public class Question {
 
     public void setCorrect(boolean correct) {
         isCorrect = correct;
+    }
+
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    public void setUsed(boolean used) {
+        isUsed = used;
     }
 
     public List<Answer> getAnswers() {

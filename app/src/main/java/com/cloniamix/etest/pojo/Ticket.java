@@ -12,6 +12,8 @@ public class Ticket {
     private int percentAnswered;//added 9.11.18
     private int usedTicketCount;//added 9.11.18
 
+    private int correctAnsweredCount;
+
     //region
 
 
@@ -54,6 +56,15 @@ public class Ticket {
     public void setUsedTicketCount(int usedTicketCount) {
         this.usedTicketCount = usedTicketCount;
     }
+
+    public int getCorrectAnsweredCount() {
+        return correctAnsweredCount;
+    }
+
+    public void setCorrectAnsweredCount(int correctAnsweredCount) {
+        this.correctAnsweredCount = correctAnsweredCount;
+    }
+
 
     //endregion
 }
