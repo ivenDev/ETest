@@ -149,8 +149,6 @@ public class Model implements Contract.Model {
 
     @Override
     public void updateQuestionInDB(Question question) {
-        int id =question.getQuestionId();
-        boolean used = question.isUsed();
         db.mQuestionDao().updateQuestion(question.getQuestionId(), question.isCorrect(), question.isUsed());
     }
 
