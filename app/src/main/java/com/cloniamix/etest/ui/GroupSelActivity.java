@@ -1,4 +1,4 @@
-package com.cloniamix.etest.view;
+package com.cloniamix.etest.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.cloniamix.etest.R;
-import com.cloniamix.etest.presenter.PresenterOfSelections;
+import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
 
 public class GroupSelActivity extends Activity<PresenterOfSelections> {
 

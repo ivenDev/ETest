@@ -1,4 +1,4 @@
-package com.cloniamix.etest.view;
+package com.cloniamix.etest.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.cloniamix.etest.R;
 import com.cloniamix.etest.pojo.Question;
-import com.cloniamix.etest.presenter.PresenterOfSelections;
+import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
 
 import java.util.List;
 

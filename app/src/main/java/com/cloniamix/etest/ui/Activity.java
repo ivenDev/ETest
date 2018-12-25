@@ -1,4 +1,4 @@
-package com.cloniamix.etest.view;
+package com.cloniamix.etest.ui;
 
 
 import android.content.Intent;

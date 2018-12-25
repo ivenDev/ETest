@@ -1,11 +1,11 @@
-package com.cloniamix.etest.presenter;
+package com.cloniamix.etest.mvp.presenters;
 
 import com.cloniamix.etest.pojo.Answer;
 import com.cloniamix.etest.pojo.Question;
 /*import com.cloniamix.etest.pojo.Ticket;*/
-import com.cloniamix.etest.view.QuestionActivity;
-import com.cloniamix.etest.view.QuestionSelActivity;
-import com.cloniamix.etest.view.TicketSelActivity;
+import com.cloniamix.etest.ui.QuestionActivity;
+import com.cloniamix.etest.ui.QuestionSelActivity;
+import com.cloniamix.etest.ui.TicketSelActivity;
 
 import java.util.List;
 

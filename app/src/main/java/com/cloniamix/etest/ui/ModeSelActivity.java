@@ -1,11 +1,11 @@
-package com.cloniamix.etest.view;
+package com.cloniamix.etest.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import com.cloniamix.etest.R;
-import com.cloniamix.etest.presenter.PresenterOfSelections;
+import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
 
 public class ModeSelActivity extends Activity<PresenterOfSelections> implements View.OnClickListener{
 

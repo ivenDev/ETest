@@ -2,7 +2,7 @@ package com.cloniamix.etest;
 
 import android.os.Bundle;
 
-import com.cloniamix.etest.presenter.MainPresenter;
+import com.cloniamix.etest.mvp.presenters.MainPresenter;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 

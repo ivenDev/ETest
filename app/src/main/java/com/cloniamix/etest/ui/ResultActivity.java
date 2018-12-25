@@ -1,4 +1,4 @@
-package com.cloniamix.etest.view;
+package com.cloniamix.etest.ui;
 
 
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cloniamix.etest.R;
-import com.cloniamix.etest.presenter.PresenterOfResult;
+import com.cloniamix.etest.mvp.presenters.PresenterOfResult;
 
 public class ResultActivity extends Activity<PresenterOfResult> {
 

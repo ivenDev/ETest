@@ -1,4 +1,4 @@
-package com.cloniamix.etest.presenter;
+package com.cloniamix.etest.mvp.presenters;
 
 import com.cloniamix.etest.Contract;
 import com.cloniamix.etest.model.Model;
