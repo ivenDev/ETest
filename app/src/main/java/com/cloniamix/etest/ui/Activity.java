@@ -30,6 +30,6 @@ public abstract class Activity<P> extends AppCompatActivity implements Contract.
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        /*mPresenter = null;*/
+        /*mPresenterOfSelections = null;*/
     }
 }

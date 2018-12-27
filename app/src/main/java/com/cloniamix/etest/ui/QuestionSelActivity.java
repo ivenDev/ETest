@@ -9,29 +9,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.cloniamix.etest.R;
-import com.cloniamix.etest.pojo.Question;
+import com.cloniamix.etest.mvp.views.SelView;
 import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
 
-import java.util.List;
+public class QuestionSelActivity extends MvpAppCompatActivity implements SelView {
 
-public class QuestionSelActivity extends Activity<PresenterOfSelections> {
-
-    private int mGroupNum;
-    private int mQuestionNum;
+    @InjectPresenter
+    PresenterOfSelections mPresenterOfSelections;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_selection);
 
-        mPresenter = new PresenterOfSelections(this);
-        mGroupNum = getIntent().getIntExtra("groupNum", 2);
-        setTitle("Группа " + mGroupNum);
+        mPresenterOfSelections.setGroupNum(getIntent().getIntExtra("groupNum", 0));
 
-        List<Question> questionList = mPresenter.getQuestions(mGroupNum);
-        int numberOfQuestions = questionList.size();
-        /*if (questionList != null){*/
+        int numberOfQuestions = mPresenterOfSelections.getQuantityOfQuestions();
 
             GridLayout gridLayout = findViewById(R.id.question_selection_buttons_container);
             gridLayout.setColumnCount(4);
@@ -55,8 +51,8 @@ public class QuestionSelActivity extends Activity<PresenterOfSelections> {
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mQuestionNum = a;
-                            mPresenter.selectQuestion();
+                            mPresenterOfSelections.setQuestionNum(a);
+                            mPresenterOfSelections.questionSelBtnClicked();
                         }
                     });
 
@@ -73,18 +69,30 @@ public class QuestionSelActivity extends Activity<PresenterOfSelections> {
                 textView.setText(R.string.no_data_text);
                 gridLayout.addView(textView);
             }
-        /*}else {
-            mPresenter.receivedADataErr();
-        }*/
     }
 
     @Override
     public void goToActivity(){
         Intent intent = new Intent(this, QuestionActivity.class);
-        intent.putExtra("groupNum",mGroupNum);
-        intent.putExtra("questionNum",mQuestionNum);
+        intent.putExtra("groupNum",mPresenterOfSelections.getGroupNum());
+        intent.putExtra("questionNum",mPresenterOfSelections.getQuestionNum());
         intent.putExtra("mode", 1);
         startActivity(intent);
+
+    }
+
+    @Override
+    public void btnClick(View view) {
+
+    }
+
+    @Override
+    public void showToast(String message) {
+
+    }
+
+    @Override
+    public void setTitle() {
 
     }
 }

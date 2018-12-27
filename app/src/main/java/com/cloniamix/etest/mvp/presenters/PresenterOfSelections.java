@@ -1,56 +1,157 @@
 package com.cloniamix.etest.mvp.presenters;
 
-import com.cloniamix.etest.Contract;
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.cloniamix.etest.R;
-import com.cloniamix.etest.pojo.Question;
+import com.cloniamix.etest.model.Model;
+import com.cloniamix.etest.mvp.views.SelView;
 import com.cloniamix.etest.pojo.Ticket;
-import com.cloniamix.etest.ui.QuestionSelActivity;
-import com.cloniamix.etest.ui.TicketSelActivity;
 
 import java.util.List;
 
-public class PresenterOfSelections extends MainPresenter<Contract.View> {
+@InjectViewState
+public class PresenterOfSelections extends MvpPresenter<SelView> {
 
+    private Model mModel;
 
-    public PresenterOfSelections(Contract.View view){
-        super(view);
+    private int mGroupNum;
+    private int mMode;
+    private int mQuestionNum;
+    private int mTicketNum;
+
+    private int mQuantityOfQuestions;
+    private int mQuantityOfTickets;
+
+    public PresenterOfSelections() {
+        mGroupNum = 0;
+        mModel = new Model();
+        getViewState().setTitle();
+        mQuantityOfQuestions = mModel.getGroupQuestions(mGroupNum).size();
+        mQuantityOfTickets = mModel.getTickets(mGroupNum).size();
     }
 
-
-    public void selectGroup() {
-        mView.showToast(R.string.number_selected_group_text);
-
-        mView.goToActivity();
-    }
-
-
-    public void selectTicket(/*int ticketNum*/) {
-
-        mView.showToast(R.string.number_ticket_text);
-        mView.goToActivity();
-    }
-
-
-    public void selectMode(/*int restTextId,*/ int btnId) {
-
-        /*mView.showToast();*/
-        switch (btnId){
-            case R.id.question_mode_btn:
-                mView.goToActivity(QuestionSelActivity.class);
+    public void groupSelBtnClicked(int viewId){
+        String messageText;
+        int groupNum = 0;
+        switch (viewId){
+            case R.id.group_2_btn:
+                groupNum = 2;
                 break;
-            case R.id.ticket_mode_btn:
-                mView.goToActivity(TicketSelActivity.class);
+
+            case R.id.group_3_btn:
+                groupNum = 3;
                 break;
-            case R.id.exam_mode_btn:
+
+            case R.id.group_4_btn:
+                groupNum = 4;
+                break;
+
+            case R.id.group_5_btn:
+                groupNum = 5;
                 break;
         }
 
+        messageText = "Группа " + groupNum;
+        getViewState().showToast(messageText);
+        getViewState().goToActivity();
+    }
+
+    public void modeSelBtnClicked(int viewId) {
+        switch (viewId){
+            case R.id.question_mode_btn:
+                mMode = 1;
+                getViewState().goToActivity();
+                break;
+
+            case R.id.ticket_mode_btn:
+                mMode = 2;
+                getViewState().goToActivity();
+                break;
+
+            case R.id.exam_mode_btn:
+                mMode = 3;
+                break;
+    }
+
+}
+
+    public void questionSelBtnClicked(){
+        getViewState().goToActivity();
+    }
+
+    public void selectTicket() {
+        String messageText = "Билет " + mTicketNum;
+        getViewState().showToast(messageText);
+        getViewState().goToActivity();
+}
+
+
+
+
+    public List<Ticket> getTickets() {
+        return mModel.getTickets(mGroupNum);
     }
 
 
-    public void selectQuestion(){
-        mView.goToActivity();
+    //region getters & setters
+    public int getGroupNum() {
+        return mGroupNum;
     }
+
+    public void setGroupNum(int groupNum) {
+        mGroupNum = groupNum;
+    }
+
+    public int getMode() {
+        return mMode;
+    }
+
+    public void setMode(int mode) {
+        mMode = mode;
+    }
+
+    public int getQuestionNum() {
+        return mQuestionNum;
+    }
+
+    public void setQuestionNum(int questionNum) {
+        mQuestionNum = questionNum;
+    }
+
+    public int getTicketNum() {
+        return mTicketNum;
+    }
+
+    public void setTicketNum(int ticketNum) {
+        mTicketNum = ticketNum;
+    }
+
+    public int getQuantityOfQuestions() {
+        return mQuantityOfQuestions;
+    }
+
+    public void setQuantityOfQuestions(int quantityOfQuestions) {
+        mQuantityOfQuestions = quantityOfQuestions;
+    }
+
+    public int getQuantityOfTickets() {
+        return mQuantityOfTickets;
+    }
+
+    public void setQuantityOfTickets(int quantityOfTickets) {
+        mQuantityOfTickets = quantityOfTickets;
+    }
+
+    //endregion
+
+
+    /*
+
+
+
+
+
+
 
 
     public void receivedADataErr() {
@@ -63,8 +164,7 @@ public class PresenterOfSelections extends MainPresenter<Contract.View> {
         return mModel.getGroupQuestions(groupNum);
     }
 
-    public List<Ticket> getTickets(int groupNum) {
-        return mModel.getTickets(groupNum);
-    }
+
+    */
 
 }

@@ -9,14 +9,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.cloniamix.etest.R;
 import com.cloniamix.etest.mvp.presenters.PresenterOfTest;
+import com.cloniamix.etest.mvp.views.QuestionView;
 
 import java.util.List;
 
-public class QuestionActivity extends Activity<PresenterOfTest> {
+public class QuestionActivity extends MvpAppCompatActivity implements QuestionView {
 
-    private int mGroupNum;
+    @InjectPresenter
+    PresenterOfTest mPresenterOfTest;
+
+   /* private int mGroupNum;
     private int mTicketNum;
     private int mQuestionNum;
 
@@ -24,7 +31,7 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
 
     private TextView mQuestionTextView;
     private LinearLayout mContainerForAnswers;
-    private LinearLayout.LayoutParams lp;
+    private LinearLayout.LayoutParams lp;*/
 
 
     @Override
@@ -32,6 +39,7 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket);
 
+        mPresenterOfTest.
 
 
         if (savedInstanceState == null){
@@ -57,11 +65,6 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
 
         mPresenter.onCreated(mQuestionNum, mMode);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     public void setQuestionNum(int questionNum){
@@ -174,12 +177,6 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("questionNum",mQuestionNum);
@@ -188,23 +185,5 @@ public class QuestionActivity extends Activity<PresenterOfTest> {
         outState.putInt("mode",mMode);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-       /* mGroupNum = 0;
-        mTicketNum = 0;
-        mQuestionNum = 0;*/
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.detachView();
-
-        mPresenter = null;
-        mQuestionTextView = null;
-        mContainerForAnswers = null;
-        lp = null;
-
-    }
 }

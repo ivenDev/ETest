@@ -4,49 +4,70 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.cloniamix.etest.R;
 import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
+import com.cloniamix.etest.mvp.views.SelView;
 
-public class ModeSelActivity extends Activity<PresenterOfSelections> implements View.OnClickListener{
+public class ModeSelActivity extends MvpAppCompatActivity implements SelView {
 
-    private int mGroupNum;
+    @InjectPresenter
+    PresenterOfSelections mPresenterOfSelections;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode_selection);
-
-        mPresenter = new PresenterOfSelections(this);
-        mGroupNum = getIntent().getIntExtra("groupNum", 2);
-        setTitle("Группа " + mGroupNum);
+        mPresenterOfSelections.setGroupNum(getIntent().getIntExtra("groupNum",0));
     }
 
     @Override
-    public void onClick(View v) {
+    public void setTitle() {
+        setTitle("Группа " + mPresenterOfSelections.getGroupNum());
+    }
 
-        mPresenter.selectMode(v.getId());
-
-        /*switch (v.getId()){
-            case R.id.question_mode_btn:
-                mPresenter.selectMode(R.string.question_mode_btn_text);
-                break;
-            case R.id.ticket_mode_btn:
-
-                break;
-            case R.id.exam_mode_btn:
-                break;
-        }*/
+    @Override
+    public void btnClick(View v) {
+        mPresenterOfSelections.modeSelBtnClicked(v.getId());
     }
 
     @Override
     public void goToActivity() {
 
+        if (mPresenterOfSelections.getMode() != 3) {
+            startActivity(new Intent(this, isQuestionMode() ? QuestionSelActivity.class
+                    : TicketSelActivity.class));
+        }else {
+            Intent intent = new Intent(this, QuestionActivity.class);
+            intent.putExtra("mode", 3);
+            startActivity(intent);
+        }
+
+        /*Intent intent;
+        if (mPresenterOfSelections.getMode() == 1){
+            intent = getIntent(QuestionSelActivity.class);
+            startActivity(intent);
+        }
+        if (mPresenterOfSelections.getMode() == 2){
+            intent = getIntent(TicketSelActivity.class);
+            startActivity(intent);
+        }
+        if (mPresenterOfSelections.getMode() == 3){
+            intent = getIntent(QuestionActivity.class);
+            intent.putExtra("mode", 3);
+            startActivity(intent);
+        }*/
     }
 
     @Override
-    public void goToActivity(Class<?> cls) {
-        Intent intent = new Intent(this,cls);
-        intent.putExtra("groupNum",mGroupNum);
-        startActivity(intent);
+    public void showToast(String message) {
+
     }
+
+    private boolean isQuestionMode(){
+        return (mPresenterOfSelections.getMode() == 1);
+    }
+
 }

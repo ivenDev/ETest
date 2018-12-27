@@ -9,43 +9,43 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.cloniamix.etest.mvp.views.SelView;
 import com.cloniamix.etest.pojo.Ticket;
 import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
 import com.cloniamix.etest.R;
 import java.util.List;
 
 
-public class TicketSelActivity extends Activity<PresenterOfSelections>{
+public class TicketSelActivity extends MvpAppCompatActivity implements SelView{
 
-    private int mGroupNum;
-    private int mTicketNum;
+    @InjectPresenter
+    PresenterOfSelections mPresenterOfSelections;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_selection);
 
-        mPresenter = new PresenterOfSelections(this);
-        mGroupNum = getIntent().getIntExtra("groupNum", 2);
+        mPresenterOfSelections.setGroupNum(getIntent().getIntExtra("groupNum", 0));
 
-        setTitle("Группа " + mGroupNum);
+        List<Ticket> mTickets = mPresenterOfSelections.getTickets();
 
-        List<Ticket> mTickets = mPresenter.getTickets(mGroupNum);
-
-        if (mTickets != null) {
-            int mNumberOfTickets = mTickets.size();
+        int mNumberOfTickets = mPresenterOfSelections.getQuantityOfTickets();
 
 //region заполнение экрана кнопками билетов
-            GridLayout gridLayout = findViewById(R.id.ticket_selection_buttons_container);
-            gridLayout.setColumnCount(3);
+        GridLayout gridLayout = findViewById(R.id.ticket_selection_buttons_container);
+        gridLayout.setColumnCount(3);
 
-            if (mNumberOfTickets != 0) {
-                for (int i = 1; i <= mNumberOfTickets; i++) {
-                    GridLayout.LayoutParams buttonParam = new GridLayout
-                            .LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, 1f),
-                            GridLayout.spec(GridLayout.UNDEFINED, 1f));
-                    buttonParam.width = 0;
-                    final int a = i;
+        if (mNumberOfTickets != 0) {
+            for (int i = 1; i <= mNumberOfTickets; i++) {
+                GridLayout.LayoutParams buttonParam = new GridLayout
+                        .LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, 1f),
+                        GridLayout.spec(GridLayout.UNDEFINED, 1f));
+                buttonParam.width = 0;
+                final int a = i;
 
                     final Button button = new Button(this);
                     String btnText = getResources().getString(R.string.number_ticket_text, i);
@@ -73,8 +73,8 @@ public class TicketSelActivity extends Activity<PresenterOfSelections>{
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mTicketNum = a;
-                            mPresenter.selectTicket(/*a*/);
+                            mPresenterOfSelections.setTicketNum(a);
+                            mPresenterOfSelections.selectTicket();
                         }
                     });
 
@@ -92,38 +92,37 @@ public class TicketSelActivity extends Activity<PresenterOfSelections>{
                 gridLayout.addView(textView);
             }
             // endregion
-        } else {
-            mPresenter.receivedADataErr();
-        }
+
 
 
     }
 
 
     @Override
-    public void showToast(int resId) {
-        String toastText = getResources().getString(resId,mTicketNum);
-        Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    public void btnClick(View view) {
+
+    }
+
+    @Override
+    public void setTitle() {
+        setTitle("Группа " + mPresenterOfSelections.getGroupNum());
+    }
 
     @Override
     public void goToActivity() {
         Intent intent = new Intent(this, QuestionActivity.class);
-        intent.putExtra("groupNum",mGroupNum);
-        intent.putExtra("ticketNum",mTicketNum);
-
+        intent.putExtra("groupNum",mPresenterOfSelections.getGroupNum());
+        intent.putExtra("ticketNum",mPresenterOfSelections.getTicketNum());
         intent.putExtra("mode", 2);
-
         startActivity(intent);
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-        mPresenter.detachView();
-        mPresenter = null;
-    }
 }
