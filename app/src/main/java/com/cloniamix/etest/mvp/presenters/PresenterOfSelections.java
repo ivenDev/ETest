@@ -23,35 +23,32 @@ public class PresenterOfSelections extends MvpPresenter<SelView> {
     private int mQuantityOfTickets;
 
     public PresenterOfSelections() {
-        mGroupNum = 0;
         mModel = new Model();
         getViewState().setTitle();
-        mQuantityOfQuestions = mModel.getGroupQuestions(mGroupNum).size();
-        mQuantityOfTickets = mModel.getTickets(mGroupNum).size();
+
     }
 
     public void groupSelBtnClicked(int viewId){
         String messageText;
-        int groupNum = 0;
         switch (viewId){
             case R.id.group_2_btn:
-                groupNum = 2;
+                mGroupNum = 2;
                 break;
 
             case R.id.group_3_btn:
-                groupNum = 3;
+                mGroupNum = 3;
                 break;
 
             case R.id.group_4_btn:
-                groupNum = 4;
+                mGroupNum = 4;
                 break;
 
             case R.id.group_5_btn:
-                groupNum = 5;
+                mGroupNum = 5;
                 break;
         }
 
-        messageText = "Группа " + groupNum;
+        messageText = "Группа " + mGroupNum;
         getViewState().showToast(messageText);
         getViewState().goToActivity();
     }
@@ -79,17 +76,24 @@ public class PresenterOfSelections extends MvpPresenter<SelView> {
         getViewState().goToActivity();
     }
 
-    public void selectTicket() {
+    public void ticketSelBtnClicked() {
         String messageText = "Билет " + mTicketNum;
         getViewState().showToast(messageText);
         getViewState().goToActivity();
 }
 
-
-
-
     public List<Ticket> getTickets() {
         return mModel.getTickets(mGroupNum);
+    }
+
+    public void updateData(){
+        if (mMode == 1){
+            mQuantityOfQuestions = mModel.getGroupQuestions(mGroupNum).size();
+        }
+        if (mMode == 2){
+            mQuantityOfTickets = mModel.getTickets(mGroupNum).size();
+        }
+
     }
 
 
@@ -146,13 +150,6 @@ public class PresenterOfSelections extends MvpPresenter<SelView> {
 
 
     /*
-
-
-
-
-
-
-
 
     public void receivedADataErr() {
         mView.showToast(R.string.dataErr);

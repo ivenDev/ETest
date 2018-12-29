@@ -1,6 +1,10 @@
 package com.cloniamix.etest.mvp.presenters;
 
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.cloniamix.etest.R;
+import com.cloniamix.etest.model.Model;
+import com.cloniamix.etest.mvp.views.ResultView;
 import com.cloniamix.etest.pojo.Question;
 import com.cloniamix.etest.pojo.Ticket;
 import com.cloniamix.etest.ui.GroupSelActivity;
@@ -12,22 +16,59 @@ import com.cloniamix.etest.ui.TicketSelActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PresenterOfResult extends MainPresenter<ResultActivity> {
+@InjectViewState
+public class PresenterOfResult extends MvpPresenter<ResultView> {
 
-    private ResultActivity mView;
+    private Model mModel;
 
+    private int mGroupNum;
+    private int mTicketNum;
     private int mMode;
+
     private List<Question> mQuestionUsedList;
 
-    public PresenterOfResult(ResultActivity view){
-        super(view);
-        this.mView = super.mView;
+    public PresenterOfResult(){
+        mModel = new Model();
         mQuestionUsedList = new ArrayList<>();
+
     }
 
-    public void onCreated(int groupNum, int ticketNum, int mode){
+    public void onStarted(){
+        updateView();
+    }
 
-        mMode = mode;
+    public void onBtnClicked(int resId){
+        mModel.resetQuestionUsed(mQuestionUsedList);
+        switch (resId){
+
+            case R.id.home_btn:
+                getViewState().goToActivity(GroupSelActivity.class);
+                break;
+
+            case R.id.repeat_btn:
+                getViewState().goToActivity(QuestionActivity.class);
+                break;
+
+            case R.id.ticket_sel_btn:
+                if (mMode == 1){
+                    //режим всех вопросов группы
+                    getViewState().goToActivity(QuestionSelActivity.class);
+                }
+                if (mMode == 2){
+                    //режим повотрения билетов
+                    getViewState().goToActivity(TicketSelActivity.class);
+                }
+        /*if (mMode == 3){
+            // режим экзамена
+
+        }*/
+
+                break;
+        }
+    }
+
+    private void updateView(){
+
         mQuestionUsedList.clear();
 
         int quantityOfCorrect = 0;
@@ -35,9 +76,9 @@ public class PresenterOfResult extends MainPresenter<ResultActivity> {
 
         if (mMode == 1){
 
-            mView.changeBtns();
+            getViewState().changeBtns();
             //режим всех вопросов группы
-            for (Question question : mModel.getGroupQuestions(groupNum)){
+            for (Question question : mModel.getGroupQuestions(mGroupNum)){
 
                 if (question.isUsed()) {
                     if (question.isCorrect()){
@@ -51,7 +92,7 @@ public class PresenterOfResult extends MainPresenter<ResultActivity> {
         }
         if (mMode == 2){
             //режим повотрения билетов
-            Ticket ticket = mModel.getTicket(groupNum,ticketNum);
+            Ticket ticket = mModel.getTicket(mGroupNum,mTicketNum);
             quantityOfCorrect = ticket.getCorrectAnsweredCount();
             quantityOfInCorrect = ticket.getQuestionsNumList().size() - quantityOfCorrect;
 
@@ -64,36 +105,33 @@ public class PresenterOfResult extends MainPresenter<ResultActivity> {
 
 
 
-        mView.setQuantityOfCorrectAnswerText(R.string.quantityOfCorrectAnswersText,quantityOfCorrect);
-        mView.setQuantityOfIncorrectAnswerText(R.string.quantityOfIncorrectAnswersText,quantityOfInCorrect);
+        getViewState().setQuantityOfCorrectAnswerText(R.string.quantityOfCorrectAnswersText,quantityOfCorrect);
+        getViewState().setQuantityOfIncorrectAnswerText(R.string.quantityOfIncorrectAnswersText,quantityOfInCorrect);
     }
-    public void onBtnClicked(int resId){
-        mModel.resetQuestionUsed(mQuestionUsedList);
-        switch (resId){
 
-            case R.id.home_btn:
-                this.mView.goToActivity(GroupSelActivity.class);
-                break;
-
-            case R.id.repeat_btn:
-                this.mView.goToActivity(QuestionActivity.class);
-                break;
-
-            case R.id.ticket_sel_btn:
-                if (mMode == 1){
-                    //режим всех вопросов группы
-                    this.mView.goToActivity(QuestionSelActivity.class);
-                }
-                if (mMode == 2){
-                    //режим повотрения билетов
-                    this.mView.goToActivity(TicketSelActivity.class);
-                }
-        /*if (mMode == 3){
-            // режим экзамена
-
-        }*/
-
-                break;
-        }
+    //region getters & setters
+    public int getGroupNum() {
+        return mGroupNum;
     }
+
+    public void setGroupNum(int groupNum) {
+        mGroupNum = groupNum;
+    }
+
+    public int getTicketNum() {
+        return mTicketNum;
+    }
+
+    public void setTicketNum(int ticketNum) {
+        mTicketNum = ticketNum;
+    }
+
+    public int getMode() {
+        return mMode;
+    }
+
+    public void setMode(int mode) {
+        mMode = mode;
+    }
+    //endregion
 }

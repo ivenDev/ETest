@@ -46,7 +46,7 @@
                 android:id="@+id/repeat_btn"
                 style="@style/resultActivityButton"
                 android:text="@string/repeatButtonText"
-                android:onClick="onClick"
+                android:onClick="onMyBtnClick"
 
 
                 />
@@ -55,7 +55,7 @@
                 android:id="@+id/ticket_sel_btn"
                 style="@style/resultActivityButton"
                 android:text="К выбору билета"
-                android:onClick="onClick"
+                android:onClick="onMyBtnClick"
                 />
         </LinearLayout>
         <Button
@@ -63,7 +63,7 @@
             style="@style/BtnGroupSel"
             android:padding="12dp"
             android:text="@string/homeButtonText"
-            android:onClick="onClick"
+            android:onClick="onMyBtnClick"
 
             />
 

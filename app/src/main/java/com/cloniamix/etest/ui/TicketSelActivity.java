@@ -30,6 +30,8 @@ public class TicketSelActivity extends MvpAppCompatActivity implements SelView{
         setContentView(R.layout.activity_ticket_selection);
 
         mPresenterOfSelections.setGroupNum(getIntent().getIntExtra("groupNum", 0));
+        mPresenterOfSelections.setMode(2);
+        mPresenterOfSelections.updateData();
 
         List<Ticket> mTickets = mPresenterOfSelections.getTickets();
 
@@ -74,7 +76,7 @@ public class TicketSelActivity extends MvpAppCompatActivity implements SelView{
                         @Override
                         public void onClick(View v) {
                             mPresenterOfSelections.setTicketNum(a);
-                            mPresenterOfSelections.selectTicket();
+                            mPresenterOfSelections.ticketSelBtnClicked();
                         }
                     });
 
@@ -119,7 +121,7 @@ public class TicketSelActivity extends MvpAppCompatActivity implements SelView{
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra("groupNum",mPresenterOfSelections.getGroupNum());
         intent.putExtra("ticketNum",mPresenterOfSelections.getTicketNum());
-        intent.putExtra("mode", 2);
+        intent.putExtra("mode", mPresenterOfSelections.getMode());
         startActivity(intent);
     }
 

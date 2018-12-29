@@ -26,6 +26,8 @@ public class QuestionSelActivity extends MvpAppCompatActivity implements SelView
         setContentView(R.layout.activity_question_selection);
 
         mPresenterOfSelections.setGroupNum(getIntent().getIntExtra("groupNum", 0));
+        mPresenterOfSelections.setMode(1);
+        mPresenterOfSelections.updateData();
 
         int numberOfQuestions = mPresenterOfSelections.getQuantityOfQuestions();
 
@@ -76,7 +78,7 @@ public class QuestionSelActivity extends MvpAppCompatActivity implements SelView
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra("groupNum",mPresenterOfSelections.getGroupNum());
         intent.putExtra("questionNum",mPresenterOfSelections.getQuestionNum());
-        intent.putExtra("mode", 1);
+        intent.putExtra("mode", mPresenterOfSelections.getMode());
         startActivity(intent);
 
     }

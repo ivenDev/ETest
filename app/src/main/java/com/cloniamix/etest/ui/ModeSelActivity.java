@@ -7,20 +7,22 @@ import android.view.View;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
 import com.cloniamix.etest.R;
 import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
 import com.cloniamix.etest.mvp.views.SelView;
 
 public class ModeSelActivity extends MvpAppCompatActivity implements SelView {
 
-    @InjectPresenter
+    @InjectPresenter(type = PresenterType.GLOBAL,tag = "globPres")
     PresenterOfSelections mPresenterOfSelections;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode_selection);
-        mPresenterOfSelections.setGroupNum(getIntent().getIntExtra("groupNum",0));
+        int groupNum = getIntent().getIntExtra("groupNum",0);
+        mPresenterOfSelections.setGroupNum(groupNum);
     }
 
     @Override
@@ -37,8 +39,10 @@ public class ModeSelActivity extends MvpAppCompatActivity implements SelView {
     public void goToActivity() {
 
         if (mPresenterOfSelections.getMode() != 3) {
-            startActivity(new Intent(this, isQuestionMode() ? QuestionSelActivity.class
-                    : TicketSelActivity.class));
+            Intent intent = new Intent(this, isQuestionMode() ? QuestionSelActivity.class
+                    : TicketSelActivity.class);
+            intent.putExtra("groupNum", mPresenterOfSelections.getGroupNum());
+            startActivity(intent);
         }else {
             Intent intent = new Intent(this, QuestionActivity.class);
             intent.putExtra("mode", 3);

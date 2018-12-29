@@ -23,15 +23,9 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
     @InjectPresenter
     PresenterOfTest mPresenterOfTest;
 
-   /* private int mGroupNum;
-    private int mTicketNum;
-    private int mQuestionNum;
-
-    private int mMode;
-
     private TextView mQuestionTextView;
     private LinearLayout mContainerForAnswers;
-    private LinearLayout.LayoutParams lp;*/
+    private LinearLayout.LayoutParams lp;
 
 
     @Override
@@ -39,59 +33,41 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket);
 
-        mPresenterOfTest.
-
-
-        if (savedInstanceState == null){
-            mQuestionNum = getIntent().getIntExtra("questionNum",1);
-            mGroupNum = getIntent().getIntExtra("groupNum",3);
-            mTicketNum = getIntent().getIntExtra("ticketNum",0);
-
-            mMode = getIntent().getIntExtra("mode", 0);
-        }else {
-            mQuestionNum = savedInstanceState.getInt("questionNum");
-            mGroupNum = savedInstanceState.getInt("groupNum");
-            mTicketNum = savedInstanceState.getInt("ticketNum");
-
-            mMode = savedInstanceState.getInt("mode");
-        }
-
-
-
-        mPresenter = new PresenterOfTest(this,mGroupNum, mTicketNum);
+        /*mPresenterOfTest.setGroupNum(getIntent().getIntExtra("groupNum",0));
+        mPresenterOfTest.setTicketNum(getIntent().getIntExtra("ticketNum",0));
+        mPresenterOfTest.setQuestionNum(getIntent().getIntExtra("questionNum",1));
+        mPresenterOfTest.setMode(getIntent().getIntExtra("mode", 0));*/
 
         mQuestionTextView = findViewById(R.id.question_text_view);
         mContainerForAnswers = findViewById(R.id.container_for_answer_buttons);
 
-        mPresenter.onCreated(mQuestionNum, mMode);
+        /*mPresenterOfTest.updateData();*/
+
+
 
     }
 
-    public void setQuestionNum(int questionNum){
-        mQuestionNum = questionNum;
-    }
 
-    public void setTicketNum(int ticketNum){
-        mTicketNum = ticketNum;
-    }
-
-
+    @Override
     public void setTitle(){
-        if (mTicketNum != 0){
-            setTitle("Гр" + mGroupNum + " Б" + mTicketNum + " Вопрос " + mQuestionNum);
+        int groupNum = mPresenterOfTest.getGroupNum();
+        int ticketNum = mPresenterOfTest.getTicketNum();
+        int questionNum = mPresenterOfTest.getQuestionNum();
+        if (ticketNum != 0){
+            setTitle("Гр" + groupNum + " Б" + ticketNum + " Вопрос " + questionNum);
         }else {
-            setTitle("Гр" + mGroupNum + " Вопрос " + mQuestionNum);
+            setTitle("Гр" + groupNum + " Вопрос " + questionNum);
         }
-
     }
 
+    @Override
     public void showQuestionText(String questionText){
         mQuestionTextView.setText(questionText);
 
     }
 
+    @Override
     public void showAnswers(List<String> answers){
-        mContainerForAnswers = (LinearLayout) findViewById(R.id.container_for_answer_buttons);
         mContainerForAnswers.removeAllViews();
         lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER_HORIZONTAL;
@@ -112,7 +88,7 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
                 @Override
                 public void onClick(View v) {
 
-                    mPresenter.onAnswerClicked(button.getText().toString());
+                    mPresenterOfTest.onAnswerClicked(button.getText().toString());
                 }
             });
             mContainerForAnswers.addView(button);
@@ -120,6 +96,7 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
 
     }
 
+    @Override
     public void showCorrectAnswer(String yourAnswer, String correctAnswer){
 
         mContainerForAnswers.removeAllViews();
@@ -144,7 +121,7 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.updateView();
+                mPresenterOfTest.nextBtnClicked();
             }
         });
 
@@ -156,34 +133,38 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
     public void goToActivity() {
 
         Intent intent = new Intent(this,ResultActivity.class);
-        intent.putExtra("groupNum",mGroupNum);
-        intent.putExtra("ticketNum",mTicketNum);
-        intent.putExtra("mode",mMode);
+        intent.putExtra("groupNum",mPresenterOfTest.getGroupNum());
+        intent.putExtra("ticketNum",mPresenterOfTest.getTicketNum());
+        intent.putExtra("mode",mPresenterOfTest.getMode());
         startActivity(intent);
     }
 
+
+
     @Override
+    public void showToast(String message) {
+
+    }
+
+    public void getData(){
+        mPresenterOfTest.setGroupNum(getIntent().getIntExtra("groupNum",0));
+        mPresenterOfTest.setTicketNum(getIntent().getIntExtra("ticketNum",0));
+        mPresenterOfTest.setQuestionNum(getIntent().getIntExtra("questionNum",1));
+        mPresenterOfTest.setMode(getIntent().getIntExtra("mode", 0));
+    }
+}
+
+
+/* @Override
     public void goToActivity(Class<?> cls) {
         Intent intent = new Intent(this,cls);
         intent.putExtra("groupNum",mGroupNum);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         super.onBackPressed();
         mPresenter.onBack();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("questionNum",mQuestionNum);
-        outState.putInt("groupNum",mGroupNum);
-        outState.putInt("ticketNum",mTicketNum);
-        outState.putInt("mode",mMode);
-    }
-
-
-}
+    }*/

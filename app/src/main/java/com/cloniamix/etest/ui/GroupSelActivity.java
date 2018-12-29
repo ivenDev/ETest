@@ -8,13 +8,14 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
 import com.cloniamix.etest.R;
 import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
 import com.cloniamix.etest.mvp.views.SelView;
 
 public class GroupSelActivity extends MvpAppCompatActivity implements SelView {
 
-    @InjectPresenter
+    @InjectPresenter(type = PresenterType.GLOBAL,tag = "globPres")
     PresenterOfSelections mPresenterOfSelections;
 
     @Override

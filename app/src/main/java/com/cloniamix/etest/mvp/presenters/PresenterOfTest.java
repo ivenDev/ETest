@@ -30,48 +30,20 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
 
 
     public PresenterOfTest(){
-
         mModel = new Model();
-        mGroupNum = groupNum;
-        mTicketNum = ticketNum;
-        mQuestionNum = 1;
-        /*mQuestions = mModel.getTicketQuestions(groupNum, ticketNum);*/
+
     }
 
-    public void onBack(){
-        if (mMode == 1){
-            //режим всех вопросов группы
-            mView.goToActivity(QuestionSelActivity.class);
-        }
-        if (mMode == 2){
-            //режим повотрения билетов
-            mView.goToActivity(TicketSelActivity.class);
-        }
-        /*if (mMode == 3){
-            // режим экзамена
-
-        }*/
-    }
-
-    public void onCreated(int questionNum, int mode){
-
-        mMode = mode;
-
-        mQuestionNum = questionNum;
-
-        if (mMode == 1){
-            //режим всех вопросов группы
-            mQuestions = mModel.getGroupQuestions(mGroupNum);
-        }
-        if (mMode == 2){
-            //режим повотрения билетов
-            mQuestions = mModel.getTicketQuestions(mGroupNum, mTicketNum);
-        }
-        /*if (mMode == 3){
-            // режим экзамена
-
-        }*/
+    public void nextBtnClicked(){
         updateView();
+    }
+
+
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getViewState().getData();
+        updateData();
     }
 
     public void onAnswerClicked(String answerText){
@@ -84,7 +56,6 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
             }
         }
         mQuestionNum++;
-        mView.setQuestionNum(mQuestionNum);
         mQuestion.setUsed(true);
 
         if (answerText.equals(correctAnswerText)){
@@ -118,29 +89,91 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
             // режим экзамена
 
         }*/
-            mView.showCorrectAnswer(answerText,correctAnswerText);
+            getViewState().showCorrectAnswer(answerText,correctAnswerText);
         }
 
     }
 
-    public void updateView(){
+    private void updateView(){
 
         if (mQuestionNum <= mQuestions.size() ) {
-            /*mTicket = mModel.getTicket(mGroupNum, mTicketNum);*/
             mQuestion = mQuestions.get(mQuestionNum-1);
             String questionText = mQuestion.getQuestionText();
-            mView.setTitle();
-            mView.setQuestionNum(mQuestionNum);
-            mView.showQuestionText(questionText);
+            getViewState().setTitle();
+            getViewState().showQuestionText(questionText);
             List<String> answers = mQuestion.getAnswersInString();
-            mView.showAnswers(answers);
+            getViewState().showAnswers(answers);
 
 
         }else {
-            mView.goToActivity();
+            getViewState().goToActivity();
         }
 
     }
 
+    private void updateData(){
+        if (mMode == 1){
+            //режим всех вопросов группы
+            mQuestions = mModel.getGroupQuestions(mGroupNum);
+        }
+        if (mMode == 2){
+            //режим повотрения билетов
+            mQuestions = mModel.getTicketQuestions(mGroupNum, mTicketNum);
+        }
+        /*if (mMode == 3){
+            // режим экзамена
 
+        }*/
+
+        updateView();
+    }
+
+    //region getters & setters
+    public int getGroupNum() {
+        return mGroupNum;
+    }
+
+    public void setGroupNum(int groupNum) {
+        mGroupNum = groupNum;
+    }
+
+    public int getTicketNum() {
+        return mTicketNum;
+    }
+
+    public void setTicketNum(int ticketNum) {
+        mTicketNum = ticketNum;
+    }
+
+    public int getQuestionNum() {
+        return mQuestionNum;
+    }
+
+    public void setQuestionNum(int questionNum) {
+        mQuestionNum = questionNum;
+    }
+
+    public int getMode() {
+        return mMode;
+    }
+
+    public void setMode(int mode) {
+        mMode = mode;
+    }
+    //endregion
 }
+
+/*public void onBack(){
+        if (mMode == 1){
+            //режим всех вопросов группы
+            mView.goToActivity(QuestionSelActivity.class);
+        }
+        if (mMode == 2){
+            //режим повотрения билетов
+            mView.goToActivity(TicketSelActivity.class);
+        }
+        *//*if (mMode == 3){
+            // режим экзамена
+
+        }*//*
+    }*/
