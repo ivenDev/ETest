@@ -14,7 +14,7 @@ import com.cloniamix.etest.mvp.views.SelView;
 
 public class ModeSelActivity extends MvpAppCompatActivity implements SelView {
 
-    @InjectPresenter(type = PresenterType.GLOBAL,tag = "globPres")
+    @InjectPresenter
     PresenterOfSelections mPresenterOfSelections;
 
     @Override

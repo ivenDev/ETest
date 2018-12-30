@@ -56,20 +56,23 @@ public class TicketSelActivity extends MvpAppCompatActivity implements SelView{
 
                     if (useCount == 0){
                          btnText = getResources().getString(R.string.number_ticket_text, i);
+                         button.setBackgroundColor(getResources().getColor(R.color.colorButtons));
                     }
                     if (useCount>0 && useCount < mTickets.get(i-1).getQuestionsNumList().size()
                             && useCount != mTickets.get(i-1).getQuestionsNumList().size()){
                         btnText = getResources().getString(R.string.number_ticket_text, i)
                         + "\n" + "В процессе";
+                        button.setBackgroundColor(getResources().getColor(R.color.colorButtons2));
                     }
                         if (useCount == mTickets.get(i-1).getQuestionsNumList().size()){
                         btnText = getResources().getString(R.string.number_ticket_text, i)
                                 + "\n" + mTickets.get(i-1).getPercentAnswered() + "%";
+                        button.setBackgroundColor(getResources().getColor(R.color.colorButtons));
                     }
 
                     button.setText(btnText);
                     button.setId(i);
-                    button.setBackgroundColor(getResources().getColor(R.color.colorButtons));
+                    /*button.setBackgroundColor(getResources().getColor(R.color.colorButtons));*/
                     button.setAllCaps(false);
                     button.setLayoutParams(buttonParam);
                     button.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +116,7 @@ public class TicketSelActivity extends MvpAppCompatActivity implements SelView{
 
     @Override
     public void setTitle() {
-        setTitle("Группа " + mPresenterOfSelections.getGroupNum());
+        setTitle("Гр" + mPresenterOfSelections.getGroupNum() + " Билеты");
     }
 
     @Override

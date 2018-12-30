@@ -29,7 +29,7 @@ public interface QuestionDao {
     @Query("SELECT * FROM ticketforroom WHERE groupNum = :groupNum AND ticketNum = :ticketNum")
     List<TicketForRoom> getTicket(int groupNum,int ticketNum);
 
-    @Query("SELECT * FROM ticketforroom WHERE groupNum = :groupNum AND ticketNum = :ticketNum AND idFromQuestion =:questionNum")
+    @Query("SELECT * FROM ticketforroom WHERE groupNum = :groupNum AND ticketNum = :ticketNum AND numFromQuestion =:questionNum")
     TicketForRoom getTicketByQuestionNum(int groupNum,int ticketNum, int questionNum);
 
     @Query("SELECT * FROM ticketforroom WHERE groupNum = :groupNum")

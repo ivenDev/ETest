@@ -10,7 +10,7 @@ public class TicketForRoom {
     private int ticketId;
     private int groupNum;
     private int ticketNum;
-    private int idFromQuestion;
+    private int numFromQuestion;
 
     private boolean isUsed;//added 9.11.18
     private boolean isCorrectAnswered;//added 9.11.18
@@ -21,11 +21,11 @@ public class TicketForRoom {
     public TicketForRoom() {
     }
 
-    /*public TicketForRoom(int ticketId, int groupNum, int ticketNum, int idFromQuestion) {
+    /*public TicketForRoom(int ticketId, int groupNum, int ticketNum, int numFromQuestion) {
         this.ticketId = ticketId;
         this.groupNum = groupNum;
         this.ticketNum = ticketNum;
-        this.idFromQuestion = idFromQuestion;
+        this.numFromQuestion = numFromQuestion;
     }*/
 
     public int getTicketId() {
@@ -52,12 +52,12 @@ public class TicketForRoom {
         this.ticketNum = ticketNum;
     }
 
-    public int getIdFromQuestion() {
-        return idFromQuestion;
+    public int getNumFromQuestion() {
+        return numFromQuestion;
     }
 
-    public void setIdFromQuestion(int idFromQuestion) {
-        this.idFromQuestion = idFromQuestion;
+    public void setNumFromQuestion(int numFromQuestion) {
+        this.numFromQuestion = numFromQuestion;
     }
 
     public boolean isUsed() {

@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.cloniamix.etest.R;
 
 import java.util.List;
@@ -17,5 +19,6 @@ public interface QuestionView extends BaseView {
     void showAnswers(List<String> answers);
     void showCorrectAnswer(String yourAnswer, String correctAnswer);
 
+    @StateStrategyType(SkipStrategy.class)
     void getData();
 }

@@ -75,7 +75,7 @@ public class ResultActivity extends MvpAppCompatActivity implements ResultView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        goToActivity(TicketSelActivity.class);
+        goToActivity(ModeSelActivity.class);
         /*Intent intent = new Intent(this,TicketSelActivity.class);
         intent.putExtra("groupNum",mGroupNum);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

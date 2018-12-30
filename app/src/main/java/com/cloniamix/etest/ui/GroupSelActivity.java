@@ -15,7 +15,7 @@ import com.cloniamix.etest.mvp.views.SelView;
 
 public class GroupSelActivity extends MvpAppCompatActivity implements SelView {
 
-    @InjectPresenter(type = PresenterType.GLOBAL,tag = "globPres")
+    @InjectPresenter
     PresenterOfSelections mPresenterOfSelections;
 
     @Override
@@ -45,5 +45,6 @@ public class GroupSelActivity extends MvpAppCompatActivity implements SelView {
     public void btnClick(View view){
         mPresenterOfSelections.groupSelBtnClicked(view.getId());
     }
+
 
 }

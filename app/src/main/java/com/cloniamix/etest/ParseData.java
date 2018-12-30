@@ -90,7 +90,7 @@ public  class ParseData {
                 TicketForRoom ticketForRoom = new TicketForRoom();
                 ticketForRoom.setGroupNum(groupNum);
                 ticketForRoom.setTicketNum(ticket.getTicketNum());
-                ticketForRoom.setIdFromQuestion(questionNum);
+                ticketForRoom.setNumFromQuestion(questionNum);
                 ticketForRoom.setUsed(false);
                 ticketForRoom.setCorrectAnswered(false);
 

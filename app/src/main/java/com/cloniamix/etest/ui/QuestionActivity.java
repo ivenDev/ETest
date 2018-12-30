@@ -101,13 +101,13 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
 
         mContainerForAnswers.removeAllViews();
         TextView yourAnswerView = new TextView(this);
-        yourAnswerView.setTextColor(getResources().getColor(R.color.colorIncorrectText));
+        yourAnswerView.setTextColor(getResources().getColor(R.color.colorIncorrect));
         yourAnswerView.setText(getResources().getString(R.string.answerText,yourAnswer) );
         yourAnswerView.setTextSize(16);
         mContainerForAnswers.addView(yourAnswerView);
 
         TextView correctAnswerView = new TextView(this);
-        correctAnswerView.setTextColor(getResources().getColor(R.color.colorCorrectText));
+        correctAnswerView.setTextColor(getResources().getColor(R.color.colorCorrect));
         correctAnswerView.setText(getResources().getString(R.string.correctAnswerText,correctAnswer));
         correctAnswerView.setTextSize(16);
         mContainerForAnswers.addView(correctAnswerView);

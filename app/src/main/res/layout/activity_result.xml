@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:hint="Правильных ответов"
             android:textSize="20sp"
-            android:textColor="@color/colorCorrectText"
+            android:textColor="@color/colorCorrect"
             android:gravity="center"
             />
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:hint="Неправильных ответов"
             android:textSize="20sp"
-            android:textColor="@color/colorIncorrectText"
+            android:textColor="@color/colorIncorrect"
             android:gravity="center"
             />
 

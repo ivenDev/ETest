@@ -54,7 +54,7 @@ public class Model implements Contract.Model {
         for (TicketForRoom ticketForRoom : mQuestionDao.getTicket(groupNumber, ticketNumber)) {
 
             ticket.setTicketNum(ticketForRoom.getTicketNum());
-            questionsNumList.add(ticketForRoom.getIdFromQuestion());
+            questionsNumList.add(ticketForRoom.getNumFromQuestion());
             if (ticketForRoom.isUsed()){
                 usedCount++;
             }

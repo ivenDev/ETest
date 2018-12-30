@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.cloniamix.etest.R;
 import com.cloniamix.etest.model.Model;
 import com.cloniamix.etest.mvp.views.SelView;
+import com.cloniamix.etest.pojo.Question;
 import com.cloniamix.etest.pojo.Ticket;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class PresenterOfSelections extends MvpPresenter<SelView> {
     private int mTicketNum;
 
     private int mQuantityOfQuestions;
+    private List<Question> mQuestions;
     private int mQuantityOfTickets;
 
     public PresenterOfSelections() {
@@ -88,12 +90,21 @@ public class PresenterOfSelections extends MvpPresenter<SelView> {
 
     public void updateData(){
         if (mMode == 1){
-            mQuantityOfQuestions = mModel.getGroupQuestions(mGroupNum).size();
+            mQuestions = mModel.getGroupQuestions(mGroupNum);
+            mQuantityOfQuestions = mQuestions.size();
         }
         if (mMode == 2){
             mQuantityOfTickets = mModel.getTickets(mGroupNum).size();
         }
 
+    }
+
+    public Boolean isQuestionUsed(int questionNum){
+        return mQuestions.get(questionNum-1).isUsed();
+    }
+
+    public Boolean isQuestionAnsweredTrue(int questionNum){
+        return mQuestions.get(questionNum - 1).isCorrect();
     }
 
 

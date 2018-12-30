@@ -35,6 +35,7 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
     }
 
     public void nextBtnClicked(){
+        mQuestionNum++;
         updateView();
     }
 
@@ -55,7 +56,7 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
                 correctAnswerText = answer.getAnswerText();
             }
         }
-        mQuestionNum++;
+
         mQuestion.setUsed(true);
 
         if (answerText.equals(correctAnswerText)){
@@ -72,7 +73,7 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
             // режим экзамена
 
         }*/
-
+            mQuestionNum++;
             updateView();
 
         } else {
