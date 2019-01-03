@@ -11,6 +11,7 @@ import com.cloniamix.etest.ui.QuestionActivity;
 import com.cloniamix.etest.ui.QuestionSelActivity;
 import com.cloniamix.etest.ui.TicketSelActivity;
 
+import java.util.Collections;
 import java.util.List;
 
 @InjectViewState
@@ -103,6 +104,7 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
             getViewState().setTitle();
             getViewState().showQuestionText(questionText);
             List<String> answers = mQuestion.getAnswersInString();
+            Collections.shuffle(answers);
             getViewState().showAnswers(answers);
 
 
