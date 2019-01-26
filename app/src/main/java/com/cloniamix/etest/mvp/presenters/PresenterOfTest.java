@@ -131,6 +131,10 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
         updateView();
     }
 
+    public void onBack(){
+        getViewState().goToBackActivity();
+        }
+
     //region getters & setters
     public int getGroupNum() {
         return mGroupNum;
@@ -166,17 +170,4 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
     //endregion
 }
 
-/*public void onBack(){
-        if (mMode == 1){
-            //режим всех вопросов группы
-            mView.goToActivity(QuestionSelActivity.class);
-        }
-        if (mMode == 2){
-            //режим повотрения билетов
-            mView.goToActivity(TicketSelActivity.class);
-        }
-        *//*if (mMode == 3){
-            // режим экзамена
 
-        }*//*
-    }*/

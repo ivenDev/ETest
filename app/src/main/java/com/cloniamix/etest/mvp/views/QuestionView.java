@@ -18,6 +18,7 @@ public interface QuestionView extends BaseView {
     void showQuestionText(String questionText);
     void showAnswers(List<String> answers);
     void showCorrectAnswer(String yourAnswer, String correctAnswer);
+    void goToBackActivity();
 
     @StateStrategyType(SkipStrategy.class)
     void getData();

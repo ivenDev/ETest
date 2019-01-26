@@ -137,9 +137,26 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
         intent.putExtra("ticketNum",mPresenterOfTest.getTicketNum());
         intent.putExtra("mode",mPresenterOfTest.getMode());
         startActivity(intent);
+
+
     }
 
 
+    @Override
+    public void goToBackActivity(){
+        Intent intent;
+        if (mPresenterOfTest.getMode() != 3) {
+            intent = new Intent(this, isQuestionMode() ? QuestionSelActivity.class
+                    : TicketSelActivity.class);
+
+        }else {
+            intent = new Intent(this, ModeSelActivity.class);
+        }
+
+        intent.putExtra("groupNum", mPresenterOfTest.getGroupNum());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
     @Override
     public void showToast(String message) {
@@ -152,6 +169,16 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
         mPresenterOfTest.setQuestionNum(getIntent().getIntExtra("questionNum",1));
         mPresenterOfTest.setMode(getIntent().getIntExtra("mode", 0));
     }
+
+    private boolean isQuestionMode(){
+        return (mPresenterOfTest.getMode() == 1);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mPresenterOfTest.onBack();
+    }
 }
 
 
@@ -163,8 +190,4 @@ public class QuestionActivity extends MvpAppCompatActivity implements QuestionVi
         startActivity(intent);
     }*/
 
-   /* @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        mPresenter.onBack();
-    }*/
+
