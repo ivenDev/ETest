@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.PresenterType;
 import com.cloniamix.etest.R;
 import com.cloniamix.etest.mvp.presenters.PresenterOfSelections;
 import com.cloniamix.etest.mvp.views.SelView;

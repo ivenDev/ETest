@@ -9,10 +9,8 @@ import com.cloniamix.etest.pojo.Question;
 import com.cloniamix.etest.pojo.Ticket;
 import com.cloniamix.etest.ui.GroupSelActivity;
 import com.cloniamix.etest.ui.QuestionSelActivity;
-import com.cloniamix.etest.ui.ResultActivity;
 import com.cloniamix.etest.ui.QuestionActivity;
 import com.cloniamix.etest.ui.TicketSelActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 

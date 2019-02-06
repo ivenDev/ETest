@@ -1,7 +1,7 @@
 package com.cloniamix.etest.dataBase.room;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
+/*import android.arch.persistence.room.Delete;*/
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
@@ -20,7 +20,7 @@ public interface QuestionDao {
     QuestionForRoom getQuestionByNum(int groupNum, int questionNum);
 //
 //    @Transaction
-//    @Query("SELECT * FROM questionforroom WHERE questionId = :id")
+//    @Query("SELECT * FROM questionForRoom WHERE questionId = :id")
 //    Question getQuestionObject(int id);
 
     @Query("SELECT * FROM AnswerForRoom WHERE groupNum = :groupNum AND idFromQuestion = :questionNum ")
@@ -38,8 +38,8 @@ public interface QuestionDao {
     @Query("UPDATE questionforroom SET isCorrect =:correct, isUsed =:used  WHERE questionId =:id" )
     void updateQuestion(int id, boolean correct, boolean used);
 
-    @Query("UPDATE ticketforroom SET isCorrectAnswered =:correct, isUsed =:used  WHERE ticketId =:id" )
-    void updateTicket(int id, boolean correct, boolean used);
+    /*@Query("UPDATE ticketForRoom SET isCorrectAnswered =:correct, isUsed =:used  WHERE ticketId =:id" )
+    void updateTicket(int id, boolean correct, boolean used);*/
 
 
 
@@ -49,8 +49,8 @@ public interface QuestionDao {
 
 
 
-    @Insert/*(onConflict = OnConflictStrategy.REPLACE)*/
-    void addQuestion(QuestionForRoom question);
+    /*@Insert*//*(onConflict = OnConflictStrategy.REPLACE)*//*
+    void addQuestion(QuestionForRoom question);*/
 
     @Insert/*(onConflict = OnConflictStrategy.REPLACE)*/
     void addQuestions(List<QuestionForRoom> questions);
@@ -61,8 +61,8 @@ public interface QuestionDao {
     @Insert
     void addTickets(List<TicketForRoom> tickets);
 
-    @Insert
-    void addTicket(TicketForRoom ticket);
+    /*@Insert
+    void addTicket(TicketForRoom ticket);*/
 
     /*@Update
     void updateDB(QuestionForRoom question);*/
@@ -70,6 +70,6 @@ public interface QuestionDao {
     @Update
     void updateTicket(TicketForRoom ticket);
 
-    @Delete
-    void deleteQuestion(QuestionForRoom question);
+    /*@Delete
+    void deleteQuestion(QuestionForRoom question);*/
 }

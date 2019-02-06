@@ -5,7 +5,7 @@ import com.cloniamix.etest.pojo.Ticket;
 import java.util.List;
 
 public interface Contract {
-    interface View {
+    /*interface View {
         void showToast(int resId);
         void goToActivity();
         void goToActivity(Class<?> cls);
@@ -16,7 +16,7 @@ public interface Contract {
         void attachView(V view);
         void detachView();
 
-    }
+    }*/
 
     interface Model {
         List<Ticket> getTickets(int groupNumber);

@@ -6,11 +6,6 @@ import com.cloniamix.etest.model.Model;
 import com.cloniamix.etest.mvp.views.QuestionView;
 import com.cloniamix.etest.pojo.Answer;
 import com.cloniamix.etest.pojo.Question;
-/*import com.cloniamix.etest.pojo.Ticket;*/
-import com.cloniamix.etest.ui.QuestionActivity;
-import com.cloniamix.etest.ui.QuestionSelActivity;
-import com.cloniamix.etest.ui.TicketSelActivity;
-
 import java.util.Collections;
 import java.util.List;
 
