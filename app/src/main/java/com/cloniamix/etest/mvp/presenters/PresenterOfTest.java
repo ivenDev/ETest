@@ -2,6 +2,7 @@ package com.cloniamix.etest.mvp.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.cloniamix.etest.R;
 import com.cloniamix.etest.model.Model;
 import com.cloniamix.etest.mvp.views.QuestionView;
 import com.cloniamix.etest.pojo.Answer;
@@ -54,6 +55,7 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
         }
 
         mQuestion.setUsed(true);
+        mQuestion.setLocalUsed(true);
 
         if (answerText.equals(correctAnswerText)){
             mQuestion.setCorrect(true);
@@ -127,6 +129,7 @@ public class PresenterOfTest extends MvpPresenter<QuestionView> {
     }
 
     public void onBack(){
+        mModel.resetQuestionLocalUsed(mQuestions);
         getViewState().goToBackActivity();
         }
 

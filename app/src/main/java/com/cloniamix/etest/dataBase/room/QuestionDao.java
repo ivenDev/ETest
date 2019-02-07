@@ -35,8 +35,11 @@ public interface QuestionDao {
     @Query("SELECT * FROM ticketforroom WHERE groupNum = :groupNum")
     List<TicketForRoom> getAllTickets(int groupNum);
 
-    @Query("UPDATE questionforroom SET isCorrect =:correct, isUsed =:used  WHERE questionId =:id" )
-    void updateQuestion(int id, boolean correct, boolean used);
+    @Query("UPDATE questionforroom SET isCorrect =:correct, isUsed =:used, isLocalUsed =:localUsed WHERE questionId =:id" )
+    void updateQuestion(int id, boolean correct, boolean used, boolean localUsed);
+
+    @Query("UPDATE questionforroom SET isLocalUsed =:localUsed  WHERE questionId =:id" )
+    void updateQuestionLocalUsed(int id, boolean localUsed);
 
     /*@Query("UPDATE ticketForRoom SET isCorrectAnswered =:correct, isUsed =:used  WHERE ticketId =:id" )
     void updateTicket(int id, boolean correct, boolean used);*/

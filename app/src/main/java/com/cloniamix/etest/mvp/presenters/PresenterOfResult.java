@@ -36,7 +36,7 @@ public class PresenterOfResult extends MvpPresenter<ResultView> {
     }
 
     public void onBtnClicked(int resId){
-        mModel.resetQuestionUsed(mQuestionUsedList);
+        mModel.resetQuestionLocalUsed(mQuestionUsedList);
         switch (resId){
 
             case R.id.home_btn:
@@ -78,7 +78,7 @@ public class PresenterOfResult extends MvpPresenter<ResultView> {
             //режим всех вопросов группы
             for (Question question : mModel.getGroupQuestions(mGroupNum)){
 
-                if (question.isUsed()) {
+                if (question.isLocalUsed()) {
                     if (question.isCorrect()){
                         quantityOfCorrect++;
                     }else {

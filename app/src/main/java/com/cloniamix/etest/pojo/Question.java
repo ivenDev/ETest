@@ -10,6 +10,7 @@ public class Question {
     private String questionText;
     private boolean isCorrect;
     private boolean isUsed;
+    private boolean isLocalUsed;
     private List<Answer> answers;
 
     //region getters & setters
@@ -64,6 +65,14 @@ public class Question {
 
     public void setUsed(boolean used) {
         isUsed = used;
+    }
+
+    public boolean isLocalUsed() {
+        return isLocalUsed;
+    }
+
+    public void setLocalUsed(boolean localUsed) {
+        isLocalUsed = localUsed;
     }
 
     public List<Answer> getAnswers() {

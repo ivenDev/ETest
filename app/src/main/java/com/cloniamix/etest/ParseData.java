@@ -71,6 +71,7 @@ public  class ParseData {
             questionForRoom.setGroupNum(groupNum);
             questionForRoom.setQuestionText(questionText);
             questionForRoom.setUsed(false);// added 9.11.18
+            questionForRoom.setLocalUsed(false);// added 07.02.19
             questionForRoom.setCorrect(correct);
             questions.add(questionForRoom);
 

@@ -12,6 +12,7 @@ public class QuestionForRoom {
     private int groupNum;
     private String questionText;
     private boolean isUsed;// added 9.11.18 отвечали ли когда нибудь на этот вопрос
+    private boolean isLocalUsed;// added 07.02.19 отвечали ли на этот вопрос во время прохождения теста в режиме вопросов
     private boolean isCorrect;
 
 
@@ -55,6 +56,14 @@ public class QuestionForRoom {
 
     public void setUsed(boolean used) {
         isUsed = used;
+    }
+
+    public boolean isLocalUsed() {
+        return isLocalUsed;
+    }
+
+    public void setLocalUsed(boolean localUsed) {
+        isLocalUsed = localUsed;
     }
 
     public boolean isCorrect() {

@@ -47,17 +47,20 @@ public class QuestionSelActivity extends MvpAppCompatActivity implements SelView
                     String btnText = "" + i;
                     button.setText(btnText);
                     button.setId(i);
+                    button.setBackgroundColor(getResources().getColor(R.color.colorButtons));
+
                     if (mPresenterOfSelections.isQuestionUsed(i)){
                         if (mPresenterOfSelections.isQuestionAnsweredTrue(i)){
                             button.setBackgroundColor(getResources().getColor(R.color.colorCorrect));
                         }else {
                             button.setBackgroundColor(getResources().getColor(R.color.colorIncorrect));
                         }
-                    }else if (mPresenterOfSelections.isQuestionAnsweredTrue(i) && !mPresenterOfSelections.isQuestionUsed(i)){
-
+                    }/*else if (mPresenterOfSelections.isQuestionAnsweredTrue(i) && !mPresenterOfSelections.isQuestionUsed(i)){
+                        button.setBackgroundColor(getResources().getColor(R.color.colorCorrect));
                     }else {
                         button.setBackgroundColor(getResources().getColor(R.color.colorButtons));
-                    }
+                    }*/
+
 
 
                     button.setAllCaps(false);

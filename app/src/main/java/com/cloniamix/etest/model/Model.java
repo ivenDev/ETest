@@ -125,6 +125,7 @@ public class Model implements Contract.Model {
             String questionText = questionForRoom.getQuestionText();
             boolean correct = questionForRoom.isCorrect();
             boolean used = questionForRoom.isUsed();
+            boolean localUsed = questionForRoom.isLocalUsed();
 
             List<Answer> answers = new ArrayList<>();
             for (AnswerForRoom answerForRoom : mQuestionDao.getAllAnswers(groupNum, questionNum)) {
@@ -139,6 +140,7 @@ public class Model implements Contract.Model {
             question.setQuestionText(questionText);
             question.setCorrect(correct);
             question.setUsed(used);
+            question.setLocalUsed(localUsed);
             question.setAnswers(answers);
 
             questions.add(question);
@@ -149,7 +151,7 @@ public class Model implements Contract.Model {
 
     @Override
     public void updateQuestionInDB(Question question) {
-        db.mQuestionDao().updateQuestion(question.getQuestionId(), question.isCorrect(), question.isUsed());
+        db.mQuestionDao().updateQuestion(question.getQuestionId(), question.isCorrect(), question.isUsed(), question.isLocalUsed());
     }
 
     @Override
@@ -161,10 +163,12 @@ public class Model implements Contract.Model {
     }
 
 
-    public void resetQuestionUsed(List<Question> questions){
+    public void resetQuestionLocalUsed(List<Question> questions){
         for (Question question: questions){
-            question.setUsed(false);
-            updateQuestionInDB(question);
+            question.setLocalUsed(false);
+            db.mQuestionDao().updateQuestionLocalUsed(question.getQuestionId(), question.isLocalUsed());
+            /*updateQuestionInDB(question);*/
+
         }
     }
 }
